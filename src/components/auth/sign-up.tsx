@@ -1,5 +1,12 @@
 "use client";
+
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import Link from "next/link";
+
 import {
   Card,
   CardContent,
@@ -17,6 +24,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -25,16 +33,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Input } from "@/components/ui/input";
 import { signUpSchema } from "@/schemas/auth/signup.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { destinations } from "@/constants/auth";
-import { MdOutlineVisibility,MdOutlineVisibilityOff  } from "react-icons/md";
-import Link from "next/link"
-function SignUp() {
-    const [showPassword, setShowPassword] = useState(false);
+
+const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState("");
+  const technicalRoles = [
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack Developer",
+  ];
+  const nonTechnicalRoles = ["Project Manager", "HR", "Sales", "Marketing"];
+  // UseForm setup with validation schema
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -44,17 +55,21 @@ function SignUp() {
       workEmail: "",
       personalMobileNo: "",
       workMobileNo: "",
-      destination: "",
+      domain: "",
+      password: "",
     },
   });
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values);
-  }
+
+  // Submit Handler
+  const onSubmit = (values: z.infer<typeof signUpSchema>) => {
+    console.log("Form Submission:", values);
+  };
+
   return (
     <div className="md:w-8/12 w-10/12 m-auto">
       <Card className="my-2">
         <CardHeader>
-          <CardTitle className="text-2xl">Registration Now</CardTitle>
+          <CardTitle className="text-2xl">Register Now</CardTitle>
           <CardDescription>
             Simplify project planning, enhance team collaboration, and manage
             tasks seamlessly. Register now to access powerful tools!
@@ -63,150 +78,186 @@ function SignUp() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              {/* this is row 1 */}
-              <div className="row_1 flex my-1 flex-wrap gap-2">
-                <div className="input_wrapper md:w-5/12 w-full">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }: { field: any }) => (
-                      <FormItem>
-                        <FormLabel>FirstName</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Jhon" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="input_wrapper md:w-5/12 w-full">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>LastName</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Dio" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-              {/* this is row 2 */}
-              <div className="row_2 flex my-1 flex-wrap gap-2">
-                <div className="input_wrapper md:w-5/12 w-full">
-                  <FormField
-                    control={form.control}
-                    name="personalEmail"
-                    render={({ field }: { field: any }) => (
-                      <FormItem>
-                        <FormLabel>Personal Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="jhon@gmail.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="input_wrapper md:w-5/12 w-full">
-                  <FormField
-                    control={form.control}
-                    name="workEmail"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Work Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="jsonweb@dr.in" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-              {/* this is row 3 */}
-              <div className="row_3 flex my-1 flex-wrap gap-2">
-                <div className="input_wrapper md:w-5/12 w-full">
-                  <FormField
-                    control={form.control}
-                    name="destination"
-                    render={({ field }: { field: any }) => (
-                      <FormItem>
-                        <FormLabel>Destination</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a Destinations" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {destinations &&
-                              destinations.map((item) => {
-                                return (
-                                  <SelectItem key={item.id} value={item.title}>
-                                    {item.title}
-                                  </SelectItem>
-                                );
-                              })}
-                          </SelectContent>
-                        </Select>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-               {/* this is row 4 */}
-               <div className="row_3 flex my-1 flex-wrap gap-2">
-               <div className="input_wrapper w-full">
-      <FormField
-        control={form.control}
-        name="password"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Password</FormLabel>
-            <FormControl>
-              <div className="relative">
-                <Input
-                  type={showPassword ? "text" : "password"} // Toggle type between "password" and "text"
-                  placeholder="Enter your password"
-                  {...field}
+              {/* Row 1: First and Last Name */}
+              <div className="flex flex-wrap gap-4">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="John" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                {/* Show/Hide Toggle Button */}
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-2 flex items-center text-gray-500"
-                  onClick={() => setShowPassword((prev:any) => !prev)}
-                >
-                  {!showPassword ? <MdOutlineVisibility /> : <MdOutlineVisibilityOff />}
-                </button>
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </div>
+
+              {/* Row 2: Personal and Work Email */}
+              <div className="flex flex-wrap gap-4">
+                <FormField
+                  control={form.control}
+                  name="personalEmail"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>Personal Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="john@gmail.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="workEmail"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>Work Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="john@work.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              <Button type="submit">Submit</Button>
+
+              {/* Row 3: Destination && Role*/}
+              <div className="flex flex-wrap gap-4">
+                <FormField
+                  control={form.control}
+                  name="domain"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>Domain</FormLabel>
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setSelectedDomain(value);
+                        }}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Domain" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {destinations.map((item) => (
+                            <SelectItem key={item.id} value={item.value}>
+                              {item.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="role"
+                  render={({ field }) => (
+                    <FormItem className="md:w-5/12 w-full">
+                      <FormLabel>Role</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Role" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {/* Conditionally render roles based on selected domain */}
+                          {}
+                          {selectedDomain === "tech" &&
+                            technicalRoles.map((role) => (
+                              <SelectItem key={role} value={role}>
+                                {role}
+                              </SelectItem>
+                            ))}
+                          {selectedDomain === "NonTech" &&
+                            nonTechnicalRoles.map((role) => (
+                              <SelectItem key={role} value={role}>
+                                {role}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Row 4: Password */}
+              <div className="flex flex-wrap gap-4">
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                          >
+                            {showPassword ? (
+                              <MdOutlineVisibilityOff />
+                            ) : (
+                              <MdOutlineVisibility />
+                            )}
+                          </button>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <Button type="submit">Register</Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter>
-          <p>Already have a account ? <Link href="/sign-in">Sign In</Link>{" "}</p>
+          <p>
+            Already have an account?{" "}
+            <Link href="/sign-in" className="text-blue-500">
+              Sign In
+            </Link>
+          </p>
         </CardFooter>
       </Card>
     </div>
   );
-}
+};
 
 export default SignUp;

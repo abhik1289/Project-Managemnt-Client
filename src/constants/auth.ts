@@ -1,18 +1,13 @@
 export const destinations = [
   {
     id: 1,
-    title: "Marketing",
-  },
-  {
-    id: 2,
-    title: "Design",
+    title: "No Technical",
+      value:"NonTech"
   },
   {
     id: 3,
-    title: "Technical",
+    title: "Technical Team",
+    value:"tech"
   },
-  {
-    id: 4,
-    title: "R&D",
-  },
+
 ];

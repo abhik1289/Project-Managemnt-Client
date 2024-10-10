@@ -33,7 +33,8 @@ export function SignIn() {
       password: "",
     },
   });
-  function onSubmit(values: z.infer<typeof loginSchema>) {
+  function onSubmit(values: any) {
+    console.log("first");
     console.log(values);
   }
   return (
@@ -76,15 +77,16 @@ export function SignIn() {
                 </FormItem>
               )}
             />
+
+            <div className="wrapper flex mt-4 gap-2 justify-start">
+              <Button className="w-full" type="submit">
+                Submit
+              </Button>
+              <Button className="w-full" variant={"outline"}>
+                <FcGoogle className="mr-2 h-4 w-4" /> Login with Email
+              </Button>
+            </div>
           </form>
-          <div className="wrapper flex mt-4 gap-2 justify-start">
-            <Button className="w-full" type="submit">
-              Submit
-            </Button>
-            <Button className="w-full" variant={"outline"}>
-              <FcGoogle className="mr-2 h-4 w-4" /> Login with Email
-            </Button>
-          </div>
         </Form>
       </CardContent>
       <CardFooter className="flex flex-col">
