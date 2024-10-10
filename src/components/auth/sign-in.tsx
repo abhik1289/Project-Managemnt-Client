@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schemas/auth/login.schema";
+import Link from "next/link";
 export function SignIn() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -87,7 +88,9 @@ export function SignIn() {
         </Form>
       </CardContent>
       <CardFooter className="flex flex-col">
-        <p>You have no account. Sign Up </p>
+        <p>
+          You have no account. <Link href="/sign-up">Sign Up</Link>{" "}
+        </p>
       </CardFooter>
     </Card>
   );

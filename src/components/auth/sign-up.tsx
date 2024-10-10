@@ -32,6 +32,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { destinations } from "@/constants/auth";
 import { MdOutlineVisibility,MdOutlineVisibilityOff  } from "react-icons/md";
+import Link from "next/link"
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -201,7 +202,7 @@ function SignUp() {
           </Form>
         </CardContent>
         <CardFooter>
-          <p>Already have a account ? Sign in</p>
+          <p>Already have a account ? <Link href="/sign-in">Sign In</Link>{" "}</p>
         </CardFooter>
       </Card>
     </div>
