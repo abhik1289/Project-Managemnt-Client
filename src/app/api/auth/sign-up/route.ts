@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
 import { connect } from "@/dbConfig/dbConfig";
+import { sendMail } from "@/helpers/sendMail";
+import { generateToken } from "@/helpers/generateToken";
+import { generateOTP } from "@/helpers/generateOtp";
 
 // Establish DB connection before handling requests
 connect();
@@ -43,23 +46,24 @@ export async function POST(req: NextRequest) {
         { status: 409 } // Conflict
       );
     }
- 
 
-    
     const hashedPassword = await bcrypt.hash(password, 10);
-   
+
     const newUser = await User.create({
       firstName,
       lastName,
       personalEmail,
       workEmail,
-    
       domain,
       role,
-      password: hashedPassword, 
+      password: hashedPassword,
     });
-
+    let email = personalEmail;
+    const otp = generateOTP();
+    const verificationToken = generateToken(newUser._id, otp);
     
+    await sendMail({ email, firstName, verificationToken, otp });
+
     return NextResponse.json(
       {
         success: true,
