@@ -15,3 +15,8 @@ export function generateToken(userId: ObjectId, otp: string) {
   );
   return token;
 }
+
+export function decodeToken(token: string) {
+  const data = jwt.verify(token, process.env.secret_key!);
+  return data;
+}
