@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { technicalRoles, nonTechnicalRoles } from "@/constants/auth";
+const allRoles:any = [...technicalRoles, ...nonTechnicalRoles];
 
 export const signUpSchema = z.object({
   firstName: z
@@ -14,15 +16,16 @@ export const signUpSchema = z.object({
     .string()
     .email("Please provide a valid work email address.")
     .optional(),
-  personalMobileNo: z
-    .string()
-    .length(10, "Personal mobile number must be exactly 10 digits."),
-  workMobileNo: z
-    .string()
-    .length(10, "Work mobile number must be exactly 10 digits.")
-    .optional(),
-  domain: z.string(),
-  role: z.string(),
+  domain: z.enum(["NonTech", "tech"], {
+    errorMap: (issue) => {
+      return { message: "Please select a valid domain (NonTech or Tech)." };
+    },
+  }),
+  role: z.enum(allRoles, {
+    errorMap: (issue) => {
+      return { message: "Please select a valid role." };
+    },
+  }),
   password: z
     .string()
     .min(5, "Password must be at least 5 characters long.")

@@ -53,16 +53,15 @@ const SignUp = () => {
       lastName: "",
       personalEmail: "",
       workEmail: "",
-      personalMobileNo: "",
-      workMobileNo: "",
-      domain: "",
+      domain: undefined,
       password: "",
+      role: "",
     },
   });
 
   // Submit Handler
-  const onSubmit = (values: z.infer<typeof signUpSchema>) => {
-    console.log("Form Submission:", values);
+  const onSubmit = (values: any) => {
+    
   };
 
   return (

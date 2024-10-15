@@ -11,3 +11,12 @@ export const destinations = [
   },
 
 ];
+
+
+export const technicalRoles = [
+  "Frontend Developer",
+  "Backend Developer",
+  "Full Stack Developer",
+];
+
+export const nonTechnicalRoles = ["Project Manager", "HR", "Sales", "Marketing"];
