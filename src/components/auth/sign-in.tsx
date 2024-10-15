@@ -1,13 +1,14 @@
 "use client";
-import * as React from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
+import HashLoader from "react-spinners/HashLoader";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,7 +26,15 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schemas/auth/login.schema";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 export function SignIn() {
+  const { toast } = useToast();
+  const router = useRouter();
+
+  // Form setup using react-hook-form and zod resolver
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -33,10 +42,50 @@ export function SignIn() {
       password: "",
     },
   });
-  function onSubmit(values: any) {
-    console.log("first");
-    console.log(values);
+
+  // State for button disable and loading indicator
+  const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Handle form submission
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    setDisable(true);
+    setLoading(true);
+    const { email, password } = values;
+
+    try {
+      const response = await axios.post("/api/auth/sign-in", {
+        email: email,
+        password,
+      });
+
+      // Handle success
+      if (response.status === 200) {
+        toast({
+          description: "Successfully logged in!",
+        });
+        setTimeout(() => {
+          router.replace(`/`);
+        }, 4000);
+      } else {
+        toast({
+          description: "Wrong email or password",
+        });
+      }
+    } catch (error: any) {
+      console.log(error);
+      // Handle error and show in toast
+      toast({
+        description: error?.response?.data?.error || "Internal Server Error",
+        variant: "destructive",
+      });
+    }
+
+    // Reset states after the request completes
+    setDisable(false);
+    setLoading(false);
   }
+
   return (
     <Card className="md:w-4/12 w-10/12">
       <CardHeader>
@@ -49,6 +98,7 @@ export function SignIn() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            {/* Email Field */}
             <FormField
               control={form.control}
               name="email"
@@ -56,13 +106,18 @@ export function SignIn() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="json@gmail" {...field} />
+                    <Input
+                      placeholder="Enter your email address"
+                      {...field}
+                      disabled={disable}
+                    />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {/* Password Field */}
             <FormField
               control={form.control}
               name="password"
@@ -70,28 +125,35 @@ export function SignIn() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Enter your password"
+                      {...field}
+                      disabled={disable}
+                    />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Submit and Google Login Button */}
             <div className="wrapper flex mt-4 gap-2 justify-start">
-              <Button className="w-full" type="submit">
-                Submit
+              <Button className="w-full" type="submit" disabled={disable}>
+                {loading ? <HashLoader color="white" size={20} /> : "Log in"}
               </Button>
-              <Button className="w-full" variant={"outline"}>
-                <FcGoogle className="mr-2 h-4 w-4" /> Login with Email
+              <Button className="w-full" variant={"outline"} disabled={disable}>
+                <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
               </Button>
             </div>
           </form>
         </Form>
       </CardContent>
+
+      {/* Sign Up Link */}
       <CardFooter className="flex flex-col">
         <p>
-          You have no account. <Link href="/sign-up">Sign Up</Link>{" "}
+          Don’t have an account? <Link href="/sign-up">Sign Up</Link>
         </p>
       </CardFooter>
     </Card>
