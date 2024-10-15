@@ -10,6 +10,7 @@ import { generateOTP } from "@/helpers/generateOtp";
 connect();
 
 export async function POST(req: NextRequest) {
+  console.log("sdsd")
   try {
     // Parse the incoming request
     const userInfos = await req.json();

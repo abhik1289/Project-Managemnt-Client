@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import Link from "next/link";
-
+import HashLoader    from "react-spinners/HashLoader";
 import {
   Card,
   CardContent,
@@ -38,10 +38,15 @@ import { destinations } from "@/constants/auth";
 import { useRouter } from "next/navigation";
 import { technicalRoles } from "@/constants/auth";
 import { nonTechnicalRoles } from "@/constants/auth";
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState("");
+  const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
   // UseForm setup with validation schema
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -57,9 +62,60 @@ const SignUp = () => {
   });
 
   // Submit Handler
-  const onSubmit = (values: any) => {
-    const { personalEmail } = values;
-    router.replace(`/active?email=${personalEmail}&isActive=false`);
+  const onSubmit = async (values: any) => {
+    setDisable(true);
+    setLoading(true);
+    const {
+      firstName,
+      lastName,
+      personalEmail,
+      workEmail,
+      domain,
+      password,
+      role,
+    } = values;
+
+    try {
+      // Make API call to sign-up endpoint
+      const response = await axios.post("/api/auth/sign-up", {
+        firstName,
+        lastName,
+        personalEmail,
+        workEmail,
+        domain,
+        password,
+        role,
+      });
+      console.log(response);
+      // Optional: Check for success/failure status in response
+      if (response.status === 201) {
+        toast({
+          description: "Registration Successfully",
+          // variant: "destructive",
+        });
+        setTimeout(() => {
+          router.replace(`/active?email=${personalEmail}&isActive=false`);
+        }, 4000);
+        // console.log(response.data.success);
+        // Successful sign-up, redirect to activation page
+        //
+      } else {
+        toast({
+          description: "Error",
+          variant: "destructive",
+        });
+        // Handle unexpected status codes
+        console.error("Unexpected response status:", response.status);
+      }
+    } catch (error: any) {
+      console.log(error.response.data.error);
+      toast({
+        description: error.response.data.error || "Internal Server Error",
+        variant: "destructive",
+      });
+    }
+    setDisable(false);
+    setLoading(false);
   };
 
   return (
@@ -240,7 +296,9 @@ const SignUp = () => {
               </div>
 
               {/* Submit Button */}
-              <Button type="submit">Register</Button>
+              <Button disabled={disable} type="submit">
+                {loading?<HashLoader   color="white" size={20} />:'Register'}
+              </Button>
             </form>
           </Form>
         </CardContent>
