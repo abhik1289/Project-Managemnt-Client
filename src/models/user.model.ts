@@ -10,12 +10,11 @@ export interface IUser extends Document {
   password: string;
   role: string;
   isVerified: boolean;
-  verifiedToken: string;
-  verifiExpiry: Date;
   mPin: string;
   profile_photo: string;
   resetToken: string;
   resetTokenExpiry: Date;
+  otp: string;
 }
 
 // Create a new schema with the required fields
@@ -29,13 +28,11 @@ const UserSchema = new Schema<IUser>(
     role: { type: String, required: true },
     password: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
-    verifiedToken: { type: String, required: false },
-    verifiExpiry: { type: Date, required: false },
     mPin: { type: String, required: false },
     profile_photo: { type: String, required: false },
     resetToken: { type: String, required: false },
     resetTokenExpiry: { type: Date, required: false },
-  
+    otp: { type: String, required: false },
   },
   {
     timestamps: true,
@@ -43,5 +40,5 @@ const UserSchema = new Schema<IUser>(
 );
 
 // Export the model or return an existing model if it has already been created
-const User = models.User ||  model<IUser>("User", UserSchema);
+const User = models.User || model<IUser>("User", UserSchema);
 export default User;

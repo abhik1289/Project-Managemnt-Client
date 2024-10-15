@@ -34,7 +34,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     </p>
 
     <a
-      href={`/verify?token=${verificationToken}`}
+      href={`${process.env.CLIENT_URl}/verify?token=${verificationToken}`}
       style={{
         display: "inline-block",
         padding: "10px 20px",

@@ -214,7 +214,7 @@ const SignUp = () => {
                   control={form.control}
                   name="password"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-10/12">
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <div className="relative">

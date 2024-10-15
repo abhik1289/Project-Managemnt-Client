@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = generateOTP(); //6 digit OTP
 
     const newUser = await User.create({
       firstName,
@@ -57,11 +58,11 @@ export async function POST(req: NextRequest) {
       domain,
       role,
       password: hashedPassword,
+      otp,
     });
     let email = personalEmail;
-    const otp = generateOTP();
-    const verificationToken = generateToken(newUser._id, otp);
-    
+    const verificationToken = generateToken(newUser._id, email);
+
     await sendMail({ email, firstName, verificationToken, otp });
 
     return NextResponse.json(

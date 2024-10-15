@@ -1,9 +1,9 @@
 import { ObjectId } from "mongoose";
 import jwt from "jsonwebtoken";
-export function generateToken(userId: ObjectId, otp: string) {
+export function generateToken(userId: ObjectId, email: string) {
   const data = {
     userId: userId,
-    otp,
+    email,
   };
 
   const token = jwt.sign(
