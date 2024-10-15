@@ -35,16 +35,13 @@ import {
 
 import { signUpSchema } from "@/schemas/auth/signup.schema";
 import { destinations } from "@/constants/auth";
-
+import { useRouter } from "next/navigation";
+import { technicalRoles } from "@/constants/auth";
+import { nonTechnicalRoles } from "@/constants/auth";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState("");
-  const technicalRoles = [
-    "Frontend Developer",
-    "Backend Developer",
-    "Full Stack Developer",
-  ];
-  const nonTechnicalRoles = ["Project Manager", "HR", "Sales", "Marketing"];
+  const router = useRouter();
   // UseForm setup with validation schema
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -61,7 +58,8 @@ const SignUp = () => {
 
   // Submit Handler
   const onSubmit = (values: any) => {
-    
+    const { personalEmail } = values;
+    router.replace(`/active?email=${personalEmail}&isActive=false`);
   };
 
   return (
@@ -208,7 +206,7 @@ const SignUp = () => {
               </div>
 
               {/* Row 4: Password */}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 ">
                 <FormField
                   control={form.control}
                   name="password"

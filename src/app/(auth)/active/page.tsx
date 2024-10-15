@@ -1,7 +1,10 @@
-import React from 'react'
+import AccountActivation from "@/components/auth/otp-form";
+import React from "react";
 
-export default function page() {
+export default function OtpForm() {
   return (
-    <div>page</div>
-  )
+    <div className="w-full h-screen flex justify-center items-center">
+      <AccountActivation />
+    </div>
+  );
 }
