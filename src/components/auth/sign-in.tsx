@@ -142,7 +142,7 @@ export function SignIn() {
               <Button className="w-full" type="submit" disabled={disable}>
                 {loading ? <HashLoader color="white" size={20} /> : "Log in"}
               </Button>
-              <Button className="w-full" variant={"outline"} disabled={disable}>
+              <Button className="w-full" type="button" variant={"outline"} disabled={disable}>
                 <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
               </Button>
             </div>
