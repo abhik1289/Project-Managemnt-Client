@@ -4,10 +4,15 @@ import CredentialsProvider from "next-auth/providers/credentials";
 // import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import User from "@/models/user.model";
+import GoogleProvider from "next-auth/providers/google";
 // import connect
-import { connect } from '@/dbConfig/dbConfig';
+import { connect } from "@/dbConfig/dbConfig";
 export const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
+    }),
     CredentialsProvider({
       name: "Credentials",
       id: "credentials",
@@ -45,20 +50,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/sign-in",
+    // signIn: "/sign-in",
   },
   session: {
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user }) {
-      console.log("Test");
-      const isAllowedToSignIn = true;
-      if (isAllowedToSignIn) {
+    async signIn({ account, user }) {
+     
+     
+      if (account?.provider === "google") {
+        console.log(user)
         return true;
       } else {
         // Return false to display a default error message
-        return false;
+        return true;
         // Or you can return a URL to redirect to:
         // return '/unauthorized'
       }
@@ -85,3 +91,6 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.SECRET_KEY,
 };
+
+
+

@@ -35,12 +35,19 @@ import {
 
 import { signUpSchema } from "@/schemas/auth/signup.schema";
 import { destinations } from "@/constants/auth";
-import { useRouter } from "next/navigation";
+import { useRouter ,redirect} from "next/navigation";
 import { technicalRoles } from "@/constants/auth";
 import { nonTechnicalRoles } from "@/constants/auth";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+
 const SignUp = () => {
+  const { data: session, status } = useSession();
+
+  if (status === "authenticated") {
+    redirect("/");
+  }
   const [showPassword, setShowPassword] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState("");
   const [disable, setDisable] = useState(false);

@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 import {
   ChevronLeft,
   Home,
@@ -13,9 +13,9 @@ import {
   ShoppingCart,
   Upload,
   Users2,
-} from "lucide-react"
+} from "lucide-react";
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -23,8 +23,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -32,7 +32,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,17 +40,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+} from "@/components/ui/select";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -58,75 +58,94 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Textarea } from "@/components/ui/textarea"
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/components/ui/toggle-group"
+} from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-const Header = () =>{
-    return (   <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b  px-4 sm:static sm:h-auto sm:border-0 py-3  sm:px-6 bg-[#b2bec3] mb-5">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="sm:hidden">
-              <PanelLeft className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="sm:max-w-xs">
-            <nav className="grid gap-6 text-lg font-medium">
-              <Link
-                href="#"
-                className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-              >
-                <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                <span className="sr-only">Acme Inc</span>
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <Home className="h-5 w-5" />
-                Dashboard
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                Orders
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-foreground"
-              >
-                <Package className="h-5 w-5" />
-                Products
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <Users2 className="h-5 w-5" />
-                Customers
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <LineChart className="h-5 w-5" />
-                Settings
-              </Link>
-            </nav>
-          </SheetContent>
-        </Sheet>
-      
-        
+} from "@/components/ui/tooltip";
+// import { Input } from "@/components/ui/input"
+const Header = () => {
+  return (
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b  px-4 sm:static sm:h-auto sm:border-0 py-3  sm:px-6 bg-[white] mb-5">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button size="icon" variant="outline" className="sm:hidden">
+            <PanelLeft className="h-5 w-5" />
+            <span className="sr-only">Toggle Menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="sm:max-w-xs">
+          <nav className="grid gap-6 text-lg font-medium">
+            <Link
+              href="#"
+              className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+            >
+              <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
+              <span className="sr-only">Acme Inc</span>
+            </Link>
+            <Link
+              href="#"
+              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            >
+              <Home className="h-5 w-5" />
+              Dashboard
+            </Link>
+            <Link
+              href="#"
+              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              Orders
+            </Link>
+            <Link
+              href="#"
+              className="flex items-center gap-4 px-2.5 text-foreground"
+            >
+              <Package className="h-5 w-5" />
+              Products
+            </Link>
+            <Link
+              href="#"
+              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            >
+              <Users2 className="h-5 w-5" />
+              Customers
+            </Link>
+            <Link
+              href="#"
+              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            >
+              <LineChart className="h-5 w-5" />
+              Settings
+            </Link>
+          </nav>
+        </SheetContent>
+      </Sheet>
+
+      <div className="header_wrapper flex justify-between w-full ">
+        <div className="project_selection">
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="search_area flex items-center border rounded-md w-2/6 px-2">
+          <Search className="h-5 w-5 text-muted-foreground mr-2" /> 
+          <Input
+            type="text"
+            className="border-none focus:ring-0"
+            placeholder="Search"
+          />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -152,7 +171,9 @@ const Header = () =>{
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </header>)
-}
+      </div>
+    </header>
+  );
+};
 
 export default Header;

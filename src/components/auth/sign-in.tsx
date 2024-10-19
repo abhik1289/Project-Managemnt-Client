@@ -28,9 +28,17 @@ import { loginSchema } from "@/schemas/auth/login.schema";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+export function SignInBox() {
+  const { data: session, status } = useSession();
 
-export function SignIn() {
+  // console.log(data)
+  console.log("SESSION DATA IS", status);
+  if (status === "authenticated") {
+    redirect("/");
+  }
   const { toast } = useToast();
   const router = useRouter();
 
@@ -142,9 +150,9 @@ export function SignIn() {
               <Button className="w-full" type="submit" disabled={disable}>
                 {loading ? <HashLoader color="white" size={20} /> : "Log in"}
               </Button>
-              <Button className="w-full" type="button" variant={"outline"} disabled={disable}>
-                <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
-              </Button>
+              <button type="button" onClick={() => signIn("google")}>
+                sign in with gooogle
+              </button>
             </div>
           </form>
         </Form>
