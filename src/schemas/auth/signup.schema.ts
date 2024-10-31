@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { technicalRoles, nonTechnicalRoles } from "@/constants/auth";
-const allRoles:any = [...technicalRoles, ...nonTechnicalRoles];
+const allRoles = [...technicalRoles, ...nonTechnicalRoles];
 
 export const signUpSchema = z.object({
   firstName: z

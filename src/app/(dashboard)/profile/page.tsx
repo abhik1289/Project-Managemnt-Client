@@ -1,5 +1,5 @@
 
-import Header from '@/components/header/header'
+// import Header from '@/components/header/header'
 import ProfileBox from '@/components/profile/profileBox'
 import React from 'react'
 // import Header from "..?"

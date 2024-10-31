@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
 
 export default function VerifyPage() {
   const searchParams = useSearchParams();
