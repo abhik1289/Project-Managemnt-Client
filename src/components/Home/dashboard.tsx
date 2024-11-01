@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import Header from "../header/header";
 import { MENU_LIST } from "@/constants/MENU_LIST";
+import { ModeToggle } from "@/app/(dashboard)/admin/mode-toggle";
 
 export const description =
   "A product edit page. The product edit page has a form to edit the product details, stock, product category, product status, and product images. The product edit page has a sidebar navigation and a main content area. The main content area has a form to edit the product details, stock, product category, product status, and product images. The sidebar navigation has links to product details, stock, product category, product status, and product images.";
@@ -68,7 +69,7 @@ export function Dashboard() {
     </aside>
     <div className="flex  flex-col sm:gap sm:py sm:pl-14">
       <Header />
-
+<ModeToggle/>
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8"></main>
     </div>
   </div>

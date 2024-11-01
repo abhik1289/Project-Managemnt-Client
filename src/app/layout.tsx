@@ -4,6 +4,8 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import RootSessionProvider from "@/context/SessionProvider";
+import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
+import { Providers } from "@/components/ThemeProvider/providers";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -32,7 +34,17 @@ export default function RootLayout({
       >
         <Toaster />
         <TooltipProvider>
-          <RootSessionProvider>{children}</RootSessionProvider>
+          <RootSessionProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              storageKey="your-storage-key-theme" // Optional. The default is "theme"
+              enableSystem
+              disableTransitionOnChange
+            >
+             {children}
+            </ThemeProvider>
+          </RootSessionProvider>
         </TooltipProvider>
       </body>
     </html>
