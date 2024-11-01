@@ -3,17 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  Home,
-  LineChart,
-  Package,
   Package2,
   Settings,
-  ShoppingCart,
-  Upload,
-  Users2,
-  CirclePlus,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 
 import {
@@ -30,9 +21,7 @@ export const description =
 export function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">

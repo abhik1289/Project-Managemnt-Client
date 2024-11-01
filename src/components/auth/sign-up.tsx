@@ -250,14 +250,14 @@ const SignUp = () => {
                           {}
                           {selectedDomain === "tech" &&
                             technicalRoles.map((role) => (
-                              <SelectItem key={role} value={role}>
-                                {role}
+                              <SelectItem key={role.id} value={role.value}>
+                                {role.title}
                               </SelectItem>
                             ))}
                           {selectedDomain === "NonTech" &&
                             nonTechnicalRoles.map((role) => (
-                              <SelectItem key={role} value={role}>
-                                {role}
+                              <SelectItem key={role.id} value={role.value}>
+                                {role.title}
                               </SelectItem>
                             ))}
                         </SelectContent>

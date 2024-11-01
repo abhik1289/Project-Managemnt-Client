@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 import {
   InputOTP,
@@ -28,20 +28,15 @@ export default function AccountActivation() {
   const { toast } = useToast();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   const [email, setEmail] = useState<string>("");
   const [otp, setOtp] = useState<string>("");
 
-  const getEmail = searchParams.get("email") || "";
+  // const getEmail = searchParams.get("email") || "";
 
-  useEffect(() => {
-    if (!getEmail) {
-      router.push("/sign-up");
-    } else {
-      setEmail(getEmail);
-    }
-  }, [getEmail, router]);
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

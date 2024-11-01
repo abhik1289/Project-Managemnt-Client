@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import HashLoader from "react-spinners/HashLoader";
 

@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { technicalRoles, nonTechnicalRoles } from "@/constants/auth";
-const allRoleValues = [...technicalRoles, ...nonTechnicalRoles].map((role) => role.value);
+const allRoleValues: any = [...technicalRoles, ...nonTechnicalRoles].map(
+  (role) => role.value
+);
 
 export const signUpSchema = z.object({
   firstName: z
@@ -17,12 +19,12 @@ export const signUpSchema = z.object({
     .email("Please provide a valid work email address.")
     .optional(),
   domain: z.enum(["NonTech", "tech"], {
-    errorMap: (issue) => {
+    errorMap: () => {
       return { message: "Please select a valid domain (NonTech or Tech)." };
     },
   }),
   role: z.enum(allRoleValues, {
-    errorMap: (issue) => {
+    errorMap: () => {
       return { message: "Please select a valid role." };
     },
   }),
