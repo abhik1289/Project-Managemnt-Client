@@ -1,15 +1,12 @@
-
-// import Header from '@/components/header/header'
-import ProfileBox from '@/components/profile/profileBox'
+import ProfilePage from '@/components/auth/profile'
 import React from 'react'
-// import Header from "..?"
-function ProfilePage() {
+
+function page() {
   return (
-    <div className="justify-center flex items-center">
-      {/* <Header/> */}
-      <ProfileBox/>
+    <div className="w-8/12 mx-auto">
+        <ProfilePage/>
     </div>
   )
 }
 
-export default ProfilePage
+export default page
