@@ -160,7 +160,7 @@ export function SignInBox() {
       {/* Sign Up Link */}
       <CardFooter className="flex flex-col">
         <p>
-          Don’t have an account? <Link href="/sign-up">Sign Up</Link>
+          Don’t have an account? <Link className="text-blue-500" href="/sign-up">Sign Up</Link>
         </p>
       </CardFooter>
     </Card>
