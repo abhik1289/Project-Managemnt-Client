@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const Header = () => {
   return (
@@ -118,13 +119,10 @@ const Header = () => {
               size="icon"
               className="overflow-hidden rounded-full"
             >
-              <Image
-                src="/placeholder-user.jpg"
-                width={36}
-                height={36}
-                alt="Avatar"
-                className="overflow-hidden rounded-full"
-              />
+             <Avatar className="w-24 h-24">
+              <AvatarImage src="/placeholder.svg?height=96&width=96" alt="Profile picture" />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
