@@ -35,7 +35,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MdLightMode } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
-import { ModeToggle } from "@/app/(dashboard)/admin/mode-toggle";
+import { ModeToggle } from "@/app/dashboard/admin/mode-toggle";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
