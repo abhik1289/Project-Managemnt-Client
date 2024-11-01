@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import HashLoader from "react-spinners/HashLoader";
-
+import { FaGoogle } from "react-icons/fa";
 import {
   Form,
   FormControl,
@@ -149,9 +149,9 @@ export function SignInBox() {
               <Button className="w-full" type="submit" disabled={disable}>
                 {loading ? <HashLoader color="white" size={20} /> : "Log in"}
               </Button>
-              <button type="button" onClick={() => signIn("google")}>
-                sign in with gooogle
-              </button>
+              <Button variant="outline" className="w-full flex gap-2" type="submit" disabled={disable}>
+              <FaGoogle />  Log in with Google
+              </Button>
             </div>
           </form>
         </Form>

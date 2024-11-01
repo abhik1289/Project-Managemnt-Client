@@ -126,8 +126,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="md:w-8/12 w-10/12 m-auto">
-      <Card className="my-2">
+    <div className="md:w-8/12 w-full m-auto">
+      <Card className="my-2 mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl">Register Now</CardTitle>
           <CardDescription>
@@ -269,7 +269,7 @@ const SignUp = () => {
               </div>
 
               {/* Row 4: Password */}
-              <div className="flex flex-wrap gap-4 ">
+              <div className="flex flex-wrap  w-full">
                 <FormField
                   control={form.control}
                   name="password"
