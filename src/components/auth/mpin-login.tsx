@@ -69,7 +69,7 @@ export default function MpinLogIn({ username = "John Doe" }: { username?: string
             <Button
               key={index}
               variant="outline"
-              className={`h-12 ${!digit ? 'invisible' : ''}`}
+              className={`h-12 ${digit==null ? 'invisible' : ''}`}
               onClick={() => digit !== null && handleKeypadClick(digit)}
             >
               {digit}
