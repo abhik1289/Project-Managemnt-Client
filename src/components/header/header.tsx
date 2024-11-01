@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,7 +11,6 @@ import {
   ShoppingCart,
   Users2,
 } from "lucide-react";
-
 
 import {
   DropdownMenu,
@@ -31,9 +31,14 @@ import {
 } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MdLightMode } from "react-icons/md";
+import { FaMoon } from "react-icons/fa";
+import { useTheme } from "next-themes";
+import { ModeToggle } from "@/app/(dashboard)/admin/mode-toggle";
 
 const Header = () => {
+  const { theme, setTheme } = useTheme();
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b  px-4 sm:static sm:h-auto sm:border-0 py-3  sm:px-6 bg-[white] mb-5">
       <Sheet>
@@ -105,12 +110,15 @@ const Header = () => {
           </Select>
         </div>
         <div className="search_area flex items-center border rounded-md w-2/6 px-2">
-          <Search className="h-5 w-5 text-muted-foreground mr-2" /> 
+          <Search className="h-5 w-5 text-muted-foreground mr-2" />
           <Input
             type="text"
             className="border-none focus:ring-0"
             placeholder="Search"
           />
+        </div>
+        <div className="theme_controller">
+          <ModeToggle />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -119,10 +127,13 @@ const Header = () => {
               size="icon"
               className="overflow-hidden rounded-full"
             >
-             <Avatar className="w-24 h-24">
-              <AvatarImage src="/placeholder.svg?height=96&width=96" alt="Profile picture" />
-              <AvatarFallback>JD</AvatarFallback>
-            </Avatar>
+              <Avatar className="w-24 h-24">
+                <AvatarImage
+                  src="/placeholder.svg?height=96&width=96"
+                  alt="Profile picture"
+                />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
