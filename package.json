@@ -34,6 +34,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "convex": "^1.17.0",
+    "hono": "^4.6.8",
     "input-otp": "^1.2.4",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.451.0",
