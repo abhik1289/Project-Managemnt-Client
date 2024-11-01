@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
   InputOTP,
@@ -34,9 +34,6 @@ export default function AccountActivation() {
   const [otp, setOtp] = useState<string>("");
 
   // const getEmail = searchParams.get("email") || "";
-
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +81,7 @@ export default function AccountActivation() {
   };
 
   return (
-    <Card className="w-[300px]">
+    <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Activate Your Account</CardTitle>
         <CardDescription>Enter the OTP sent to your email</CardDescription>
@@ -101,7 +98,7 @@ export default function AccountActivation() {
                 readOnly
               />
             </div>
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-2.5">
               <Label htmlFor="otp">OTP</Label>
               <InputOTP
                 value={otp}
@@ -111,11 +108,14 @@ export default function AccountActivation() {
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
                 </InputOTPGroup>
                 <InputOTPSeparator />
                 <InputOTPGroup>
                   <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                </InputOTPGroup>
+                <InputOTPSeparator />
+                <InputOTPGroup>
                   <InputOTPSlot index={4} />
                   <InputOTPSlot index={5} />
                 </InputOTPGroup>
