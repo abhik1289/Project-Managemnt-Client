@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { CalendarIcon, LockIcon, PhoneIcon } from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { CalendarIcon, LockIcon, PhoneIcon, Upload } from 'lucide-react'
 
 export default function ProfilePage() {
   const [showPasswordChange, setShowPasswordChange] = useState(false)
@@ -20,38 +21,55 @@ export default function ProfilePage() {
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" value="John Doe" readOnly />
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" value="john.doe@example.com" readOnly />
+        <CardContent className="space-y-6">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
+            <Avatar className="w-24 h-24">
+              <AvatarImage src="/placeholder.svg?height=96&width=96" alt="Profile picture" />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col items-center sm:items-start gap-2">
+              <Button variant="outline" size="sm">
+                <Upload className="w-4 h-4 mr-2" />
+                Update Photo
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                JPG, GIF or PNG. Max size of 800K
+              </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="work-mobile">Work Mobile</Label>
-              <div className="flex">
-                <PhoneIcon className="w-4 h-4 mr-2 mt-3" />
-                <Input id="work-mobile" value="+1 (555) 123-4567" readOnly />
+          <div className="grid gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" value="John Doe" readOnly />
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" value="john.doe@example.com" readOnly />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="work-mobile">Work Mobile</Label>
+                <div className="flex">
+                  <PhoneIcon className="w-4 h-4 mr-2 mt-3" />
+                  <Input id="work-mobile" value="+1 (555) 123-4567" readOnly />
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="personal-mobile">Personal Mobile</Label>
+                <div className="flex">
+                  <PhoneIcon className="w-4 h-4 mr-2 mt-3" />
+                  <Input id="personal-mobile" value="+1 (555) 987-6543" readOnly />
+                </div>
               </div>
             </div>
             <div>
-              <Label htmlFor="personal-mobile">Personal Mobile</Label>
+              <Label htmlFor="joining-date">Joining Date</Label>
               <div className="flex">
-                <PhoneIcon className="w-4 h-4 mr-2 mt-3" />
-                <Input id="personal-mobile" value="+1 (555) 987-6543" readOnly />
+                <CalendarIcon className="w-4 h-4 mr-2 mt-3" />
+                <Input id="joining-date" value="January 1, 2023" readOnly />
               </div>
-            </div>
-          </div>
-          <div>
-            <Label htmlFor="joining-date">Joining Date</Label>
-            <div className="flex">
-              <CalendarIcon className="w-4 h-4 mr-2 mt-3" />
-              <Input id="joining-date" value="January 1, 2023" readOnly />
             </div>
           </div>
         </CardContent>
