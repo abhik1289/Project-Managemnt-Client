@@ -19,8 +19,9 @@ export default function HomePage({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          AA
+          {/* <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb>
             <BreadcrumbList>
@@ -34,8 +35,8 @@ export default function HomePage({ children }: { children: React.ReactNode }) {
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
-        </header> */}
+          </Breadcrumb> */}
+        </header>
         {children}
       </SidebarInset>
     </SidebarProvider>
