@@ -6,7 +6,8 @@ import { Toaster } from "@/components/ui/toaster";
 import RootSessionProvider from "@/context/SessionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import RootThemeProvider from "@/context/ThemeProvider";
-import HomePage from "@/components/Home/dashboard";
+// import HomePage from "@/components/Home/dashboard";
+import TopLoader from "@/components/Toploader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,9 +39,8 @@ export default function RootLayout({
         <TooltipProvider>
           <RootSessionProvider>
             <RootThemeProvider>
-       
-                {children}
-            
+              <TopLoader />
+              {children}
             </RootThemeProvider>
           </RootSessionProvider>
         </TooltipProvider>
