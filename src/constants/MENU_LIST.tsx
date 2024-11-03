@@ -6,9 +6,9 @@ export const MENU_LIST = {
       url: "#",
       items: [
         { title: "Home", url: "#", isActive: true },
-        { title: "My Tasks", url: "#" },
+        { title: "My Tasks", url: "/" },
         { title: "Completed Tasks", url: "#" },
-        { title: "Team Members", url: "#" },
+        { title: "Team Members", url: "/dashboard/team-member" },
         { title: "Messages", url: "#" },
       ],
     },
