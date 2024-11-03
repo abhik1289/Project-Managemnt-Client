@@ -1,21 +1,18 @@
+"use client"
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
+
+
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Bell, Home, Search, User } from "lucide-react";
+import { Bell, Home, MoonIcon, Search, SunIcon, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { IoMdSearch } from "react-icons/io";
+import { GoBell } from "react-icons/go";
+import { IoMoonOutline } from "react-icons/io5";
+import { CiLight } from "react-icons/ci";
 // import { ThemeToggle } from "@/components/theme-toggle"
 import {
   DropdownMenu,
@@ -31,6 +28,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useTheme } from "next-themes";
 
 export default function HomePage({ children }: { children: React.ReactNode }) {
   return (
@@ -67,26 +66,27 @@ export default function HomePage({ children }: { children: React.ReactNode }) {
 
             <div className="flex items-center space-x-2">
               <Button variant="ghost" size="icon" className="ml-auto">
-                <Search className="h-5 w-5" />
+                <IoMdSearch className="h-12 w-h-12" />
                 <span className="sr-only">Search</span>
               </Button>
               <Button variant="ghost" size="icon">
-                <Bell className="h-5 w-5" />
+                <GoBell className="h-5 w-5" />
                 <span className="sr-only">Notifications</span>
               </Button>
               <ThemeToggle />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">
-                    <User className="h-5 w-5" />
-                    <span className="sr-only">Profile</span>
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
                   <DropdownMenuItem>Sign out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -100,45 +100,27 @@ export default function HomePage({ children }: { children: React.ReactNode }) {
 }
 
 function ThemeToggle() {
+  const { setTheme } = useTheme()
   return (
-    <Button variant="ghost" size="icon">
-      <span className="sr-only">Toggle theme</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-      >
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2"></path>
-        <path d="M12 20v2"></path>
-        <path d="m4.93 4.93 1.41 1.41"></path>
-        <path d="m17.66 17.66 1.41 1.41"></path>
-        <path d="M2 12h2"></path>
-        <path d="M20 12h2"></path>
-        <path d="m6.34 17.66-1.41 1.41"></path>
-        <path d="m19.07 4.93-1.41 1.41"></path>
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-      >
-        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-      </svg>
-    </Button>
+    <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline" size="icon">
+        <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem onClick={() => setTheme("light")}>
+        Light
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => setTheme("dark")}>
+        Dark
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => setTheme("system")}>
+        System
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
   );
 }

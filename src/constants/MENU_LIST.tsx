@@ -1,16 +1,25 @@
-import { Home, CheckSquare, PlusCircle } from "lucide-react"; // Importing icons
-
-export const MENU_LIST = [
-  {
-    title: "Home",
-    icon: <Home className="h-5 w-5" />, // Home icon
-  },
-  {
-    title: "My Task",
-    icon: <CheckSquare className="h-5 w-5" />, // Task icon
-  },
-  {
-    title: "Create Project",
-    icon: <PlusCircle className="h-5 w-5" />, // Plus Circle icon
-  },
-];
+export const MENU_LIST = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  navMain: [
+    {
+      title: "Home",
+      url: "#",
+      items: [
+        { title: "Home", url: "#", isActive: true },
+        { title: "My Tasks", url: "#" },
+        { title: "Completed Tasks", url: "#" },
+        { title: "Team Members", url: "#" },
+        { title: "Messages", url: "#" },
+      ],
+    },
+    {
+      title: "Creation",
+      url: "#",
+      items: [
+        { title: "Create Workspace", url: "#" },
+        { title: "Previous Workspaces", url: "#" },
+        { title: "Assign Role", url: "#" },
+      ],
+    },
+  ],
+};

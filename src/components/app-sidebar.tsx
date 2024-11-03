@@ -14,33 +14,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-
+import { MENU_LIST as data } from "@/constants/MENU_LIST";
 // This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Home",
-      url: "#",
-      items: [
-        { title: "Home", url: "#", isActive: true },
-        { title: "My Tasks", url: "#" },
-        { title: "Completed Tasks", url: "#" },
-        { title: "Team Members", url: "#" },
-        { title: "Messages", url: "#" },
-      ],
-    },
-    {
-      title: "Creation",
-      url: "#",
-      items: [
-        { title: "Create Workspace", url: "#" },
-        { title: "Previous Workspaces", url: "#" },
-        { title: "Assign Role", url: "#" },
-      ],
-    },
-  ],
-};
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
