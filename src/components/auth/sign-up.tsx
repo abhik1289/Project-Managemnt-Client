@@ -312,7 +312,7 @@ const SignUp = () => {
         <CardFooter>
           <p>
             Already have an account?{" "}
-            <Link href="/sign-in" className="text-blue-500">
+            <Link href="/auth/sign-in" className="text-blue-500">
               Sign In
             </Link>
           </p>

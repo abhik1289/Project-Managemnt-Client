@@ -38,9 +38,9 @@ export default function RootLayout({
         <TooltipProvider>
           <RootSessionProvider>
             <RootThemeProvider>
-              <HomePage>
+       
                 {children}
-              </HomePage>
+            
             </RootThemeProvider>
           </RootSessionProvider>
         </TooltipProvider>
