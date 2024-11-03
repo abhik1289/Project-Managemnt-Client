@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 
 import { SearchForm } from "@/components/search-form";
@@ -15,10 +16,13 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { MENU_LIST as data } from "@/constants/MENU_LIST";
+import { usePathname } from "next/navigation";
 // This is sample data.
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname()
+  pathname
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -37,7 +41,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
+                    <SidebarMenuButton asChild isActive={pathname===item.url}>
                       <a href={item.url}>{item.title}</a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
